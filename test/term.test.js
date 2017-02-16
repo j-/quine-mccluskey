@@ -153,3 +153,30 @@ test((t) => {
 		'Can combine 0b1111 and 0b11111'
 	);
 });
+
+test((t) => {
+	t.is(
+		Term.countDifferences(
+			Term.getCombinedTerm(new Term(0b0), new Term(0b0)),
+			new Term(0b0)
+		),
+		0,
+		'0b0 and 0b0 combine to 0b0'
+	);
+	t.is(
+		Term.countDifferences(
+			Term.getCombinedTerm(new Term(0b1111), new Term(0b1111)),
+			new Term(0b1111)
+		),
+		0,
+		'0b1111 and 0b1111 combine to 0b1111'
+	);
+	t.is(
+		Term.countDifferences(
+			Term.getCombinedTerm(new Term(0b10), new Term(0b01)),
+			new Term([null, null])
+		),
+		0,
+		'0b10 and 0b01 combine to `--`'
+	);
+});

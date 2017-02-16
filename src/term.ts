@@ -57,6 +57,35 @@ class Term {
 	}
 
 	/**
+	 * Combine two terms, returning a new term whose digits are replaced with an
+	 * UNCOMMON Digit where the two input terms differ.
+	 *
+	 * @static
+	 * @param {Term} left
+	 * @param {Term} right
+	 * @returns {Term}
+	 *
+	 * @memberOf Term
+	 */
+	static getCombinedTerm (left: Term, right: Term): Term {
+		const length = Math.max(left.length, right.length);
+		const state = [];
+		for (let i = 0; i < length; i++) {
+			const leftDigit = left.getDigit(i);
+			const rightDigit = right.getDigit(i);
+			state.unshift(
+				// Are the two digits the same?
+				leftDigit === rightDigit ?
+					// If so, just use one of them
+					leftDigit :
+					// Otherwise, they differ
+					Digit.UNCOMMON
+			);
+		}
+		return new Term(state);
+	}
+
+	/**
 	 * When given a number, converts it to binary and returns an array of Digits
 	 * with the most significant bit at index 0.
 	 *
