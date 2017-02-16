@@ -97,3 +97,59 @@ test((t) => {
 		'Four differences between 0b0 and 0b1010101'
 	);
 });
+
+test((t) => {
+	t.is(
+		Term.canCombine(new Term(0), new Term(0)),
+		false,
+		'Cannot combine two empty terms'
+	);
+	t.is(
+		Term.canCombine(new Term(0b0), new Term(0b0)),
+		false,
+		'Cannot combine 0b0 and 0b0'
+	);
+	t.is(
+		Term.canCombine(new Term(0b1), new Term(0b1)),
+		false,
+		'Cannot combine 0b1 and 0b1'
+	);
+	t.is(
+		Term.canCombine(new Term(0b1), new Term(0b1)),
+		false,
+		'Cannot combine 0b1 and 0b1'
+	);
+	t.is(
+		Term.canCombine(new Term(0b10), new Term(0b10)),
+		false,
+		'Cannot combine 0b10 and 0b10'
+	);
+	t.is(
+		Term.canCombine(new Term(0b1111), new Term(0b1111)),
+		false,
+		'Cannot combine 0b1111 and 0b1111'
+	);
+});
+
+test((t) => {
+	t.is(
+		Term.canCombine(new Term(0b1), new Term(0b0)),
+		true,
+		'Can combine 0b1 and 0b0'
+	);
+	t.is(
+		Term.canCombine(new Term(0b11), new Term(0b1)),
+		true,
+		'Can combine 0b11 and 0b1'
+	);
+	t.is(
+		Term.canCombine(new Term(0b1000), new Term(0b0)),
+		true,
+		'Can combine 0b1000 and 0b0'
+	);
+	t.is(
+		Term.canCombine(new Term(0b1111), new Term(0b11111)),
+		true,
+		'Can combine 0b1111 and 0b11111'
+	);
+});

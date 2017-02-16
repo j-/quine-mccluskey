@@ -12,6 +12,21 @@ class Term {
 	protected digits: Digit[] = [];
 
 	/**
+	 * Determine if two terms can be combined. Will return `true` if there is
+	 * only one digit difference between `left` and `right`.
+	 *
+	 * @static
+	 * @param {Term} left
+	 * @param {Term} right
+	 * @returns {boolean}
+	 *
+	 * @memberOf Term
+	 */
+	static canCombine (left: Term, right: Term): boolean {
+		return Term.countDifferences(left, right) === 1;
+	}
+
+	/**
 	 * Count the number of digits that differ between two terms.
 	 *
 	 * @example
