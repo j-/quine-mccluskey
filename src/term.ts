@@ -146,6 +146,17 @@ class Term {
 			return digits[length - idx - 1];
 		}
 	}
+
+	/**
+	 * Get the array of Digits that make up this term.
+	 *
+	 * @returns {Digit[]}
+	 *
+	 * @memberOf Term
+	 */
+	public getState (): Digit[] {
+		return this.digits;
+	}
 }
 
 export default Term;
