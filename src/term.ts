@@ -12,80 +12,6 @@ class Term {
 	protected digits: Digit[] = [];
 
 	/**
-	 * Determine if two terms can be combined. Will return `true` if there is
-	 * only one digit difference between `left` and `right`.
-	 *
-	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
-	 * @returns {boolean}
-	 *
-	 * @memberOf Term
-	 */
-	static canCombine (left: Term, right: Term): boolean {
-		return Term.countDifferences(left, right) === 1;
-	}
-
-	/**
-	 * Count the number of digits that differ between two terms.
-	 *
-	 * @example
-	 *
-	 *     Term.countDifferences(
-	 *       new Term(0b0000),
-	 *       new Term(0b1010)
-	 *     ) // => 2
-	 *
-	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
-	 * @returns {number}
-	 *
-	 * @memberOf Term
-	 */
-	static countDifferences (left: Term, right: Term): number {
-		const length = Math.max(left.length, right.length);
-		let total = 0;
-		for (let i = 0; i < length; i++) {
-			const leftDigit = left.getDigit(i);
-			const rightDigit = right.getDigit(i);
-			if (leftDigit !== rightDigit) {
-				total++;
-			}
-		}
-		return total;
-	}
-
-	/**
-	 * Combine two terms, returning a new term whose digits are replaced with an
-	 * UNCOMMON Digit where the two input terms differ.
-	 *
-	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
-	 * @returns {Term}
-	 *
-	 * @memberOf Term
-	 */
-	static getCombinedTerm (left: Term, right: Term): Term {
-		const length = Math.max(left.length, right.length);
-		const state = [];
-		for (let i = 0; i < length; i++) {
-			const leftDigit = left.getDigit(i);
-			const rightDigit = right.getDigit(i);
-			state.unshift(
-				// Are the two digits the same?
-				leftDigit === rightDigit ?
-					// If so, just use one of them
-					leftDigit :
-					// Otherwise, they differ
-					Digit.UNCOMMON
-			);
-		}
-		return new Term(state);
-	}
-
-	/**
 	 * When given a number, converts it to binary and returns an array of Digits
 	 * with the most significant bit at index 0.
 	 *
@@ -105,12 +31,15 @@ class Term {
 	/**
 	 * Creates an instance of Term.
 	 *
-	 * @param {TermState} state
+	 * @param {(TermState | Term)} state
 	 *
 	 * @memberOf Term
 	 */
-	constructor (state: TermState) {
-		if (typeof state === 'number') {
+	constructor (state: TermState | Term) {
+		if (state instanceof Term) {
+			// Copy the other term's state
+			this.digits = [...state.getState()];
+		} else if (typeof state === 'number') {
 			this.digits = Term.getDigitsFromNumber(state);
 		} else {
 			this.digits = state;
