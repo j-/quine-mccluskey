@@ -28,7 +28,7 @@ class TermColumn {
 	static ensureExists (terms: Term[], item: Term) {
 		const contains = terms.some((other) => (
 			// These terms are equal
-			Implicant.countDifferences(item, other) === 0
+			Term.isEqual(item, other)
 		));
 		if (contains) {
 			// This item is already in the term list.

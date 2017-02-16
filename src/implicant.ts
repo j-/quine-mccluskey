@@ -26,36 +26,6 @@ class Implicant extends Term {
 	}
 
 	/**
-	 * Count the number of digits that differ between two terms or implicants.
-	 *
-	 * @example
-	 *
-	 *     Implicant.countDifferences(
-	 *       new Term(0b0000),
-	 *       new Term(0b1010)
-	 *     ) // => 2
-	 *
-	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
-	 * @returns {number}
-	 *
-	 * @memberOf Implicant
-	 */
-	static countDifferences (left: Term, right: Term): number {
-		const length = Math.max(left.length, right.length);
-		let total = 0;
-		for (let i = 0; i < length; i++) {
-			const leftDigit = left.getDigit(i);
-			const rightDigit = right.getDigit(i);
-			if (leftDigit !== rightDigit) {
-				total++;
-			}
-		}
-		return total;
-	}
-
-	/**
 	 * Combine two terms, returning a new term whose digits are replaced with an
 	 * UNCOMMON Digit where the two input terms differ.
 	 *

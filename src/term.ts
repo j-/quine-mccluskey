@@ -12,6 +12,36 @@ class Term {
 	protected digits: Digit[] = [];
 
 	/**
+	 * Count the number of digits that differ between two terms.
+	 *
+	 * @example
+	 *
+	 *     Term.countDifferences(
+	 *       new Term(0b0000),
+	 *       new Term(0b1010)
+	 *     ) // => 2
+	 *
+	 * @static
+	 * @param {Term} left
+	 * @param {Term} right
+	 * @returns {number}
+	 *
+	 * @memberOf Term
+	 */
+	static countDifferences (left: Term, right: Term): number {
+		const length = Math.max(left.length, right.length);
+		let total = 0;
+		for (let i = 0; i < length; i++) {
+			const leftDigit = left.getDigit(i);
+			const rightDigit = right.getDigit(i);
+			if (leftDigit !== rightDigit) {
+				total++;
+			}
+		}
+		return total;
+	}
+
+	/**
 	 * When given a number, converts it to binary and returns an array of Digits
 	 * with the most significant bit at index 0.
 	 *
@@ -26,6 +56,20 @@ class Term {
 		return digits.map((digit) => (
 			digit === 0 ? Digit.UNSET : Digit.SET
 		));
+	}
+
+	/**
+	 * Determines if all the digits in each given term are the same.
+	 *
+	 * @static
+	 * @param {Term} left
+	 * @param {Term} right
+	 * @returns {boolean}
+	 *
+	 * @memberOf Term
+	 */
+	static isEqual (left: Term, right: Term): boolean {
+		return Term.countDifferences(left, right) === 0;
 	}
 
 	/**
