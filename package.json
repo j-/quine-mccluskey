@@ -1,0 +1,23 @@
+{
+  "name": "quine-mccluskey",
+  "version": "0.0.0",
+  "description": "Minimize boolean functions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-/quine-mccluskey.git"
+  },
+  "author": "Jamie Hoeks <j@skeoh.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/j-/quine-mccluskey/issues"
+  },
+  "homepage": "https://github.com/j-/quine-mccluskey#readme",
+  "devDependencies": {
+    "typescript": "^2.1.6"
+  }
+}
