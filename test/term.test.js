@@ -30,153 +30,62 @@ test((t) => {
 });
 
 test((t) => {
-	t.is(
-		Term.countDifferences(new Term(0b1111), new Term(0b1111)),
-		0,
-		'No difference between 0b1111 and 0b1111'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1100), new Term(0b1100)),
-		0,
-		'No difference between 0b1100 and 0b1100'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1101), new Term(0b1101)),
-		0,
-		'No difference between 0b1101 and 0b1101'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1000), new Term(0b1000)),
-		0,
-		'No difference between 0b1000 and 0b1000'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1), new Term(0b1)),
-		0,
-		'No difference between 0b1 and 0b1'
-	);
+	t.is(Term.countDifferences(new Term(0b1111), new Term(0b1111)), 0, 'No difference between 0b1111 and 0b1111');
+	t.is(Term.countDifferences(new Term(0b1100), new Term(0b1100)), 0, 'No difference between 0b1100 and 0b1100');
+	t.is(Term.countDifferences(new Term(0b1101), new Term(0b1101)), 0, 'No difference between 0b1101 and 0b1101');
+	t.is(Term.countDifferences(new Term(0b1000), new Term(0b1000)), 0, 'No difference between 0b1000 and 0b1000');
+	t.is(Term.countDifferences(new Term(0b1), new Term(0b1)), 0, 'No difference between 0b1 and 0b1');
 });
 
 test((t) => {
-	t.is(
-		Term.countDifferences(new Term(0b1110), new Term(0b1111)),
-		1,
-		'One difference between 0b1110 and 0b1111'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1101), new Term(0b1100)),
-		1,
-		'One difference between 0b1101 and 0b1100'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1001), new Term(0b1101)),
-		1,
-		'One difference between 0b1001 and 0b1101'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b0), new Term(0b1000)),
-		1,
-		'One difference between 0b0 and 0b1000'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b1), new Term(0b11)),
-		1,
-		'One difference between 0b1 and 0b11'
-	);
+	t.is(Term.countDifferences(new Term(0b1110), new Term(0b1111)), 1, 'One difference between 0b1110 and 0b1111');
+	t.is(Term.countDifferences(new Term(0b1101), new Term(0b1100)), 1, 'One difference between 0b1101 and 0b1100');
+	t.is(Term.countDifferences(new Term(0b1001), new Term(0b1101)), 1, 'One difference between 0b1001 and 0b1101');
+	t.is(Term.countDifferences(new Term(0b0), new Term(0b1000)), 1, 'One difference between 0b0 and 0b1000');
+	t.is(Term.countDifferences(new Term(0b1), new Term(0b11)), 1, 'One difference between 0b1 and 0b11');
 });
 
 test((t) => {
-	t.is(
-		Term.countDifferences(new Term(0b1111), new Term(0b0000)),
-		4,
-		'Four differences between 0b1111 and 0b0000'
-	);
-	t.is(
-		Term.countDifferences(new Term(0b0), new Term(0b1010101)),
-		4,
-		'Four differences between 0b0 and 0b1010101'
-	);
+	t.is(Term.countDifferences(new Term(0b1111), new Term(0b0000)), 4, 'Four differences between 0b1111 and 0b0000');
+	t.is(Term.countDifferences(new Term(0b0), new Term(0b1010101)), 4, 'Four differences between 0b0 and 0b1010101');
 });
 
 test((t) => {
-	t.is(
-		Term.canCombine(new Term(0), new Term(0)),
-		false,
-		'Cannot combine two empty terms'
-	);
-	t.is(
-		Term.canCombine(new Term(0b0), new Term(0b0)),
-		false,
-		'Cannot combine 0b0 and 0b0'
-	);
-	t.is(
-		Term.canCombine(new Term(0b1), new Term(0b1)),
-		false,
-		'Cannot combine 0b1 and 0b1'
-	);
-	t.is(
-		Term.canCombine(new Term(0b1), new Term(0b1)),
-		false,
-		'Cannot combine 0b1 and 0b1'
-	);
-	t.is(
-		Term.canCombine(new Term(0b10), new Term(0b10)),
-		false,
-		'Cannot combine 0b10 and 0b10'
-	);
-	t.is(
-		Term.canCombine(new Term(0b1111), new Term(0b1111)),
-		false,
-		'Cannot combine 0b1111 and 0b1111'
-	);
+	t.false(Term.canCombine(new Term(0), new Term(0)), 'Cannot combine two empty terms');
+	t.false(Term.canCombine(new Term(0b0), new Term(0b0)), 'Cannot combine 0b0 and 0b0');
+	t.false(Term.canCombine(new Term(0b1), new Term(0b1)), 'Cannot combine 0b1 and 0b1');
+	t.false(Term.canCombine(new Term(0b1), new Term(0b1)), 'Cannot combine 0b1 and 0b1');
+	t.false(Term.canCombine(new Term(0b10), new Term(0b10)), 'Cannot combine 0b10 and 0b10');
+	t.false(Term.canCombine(new Term(0b1111), new Term(0b1111)), 'Cannot combine 0b1111 and 0b1111');
 });
 
 test((t) => {
-	t.is(
-		Term.canCombine(new Term(0b1), new Term(0b0)),
-		true,
-		'Can combine 0b1 and 0b0'
-	);
-	t.is(
-		Term.canCombine(new Term(0b11), new Term(0b1)),
-		true,
-		'Can combine 0b11 and 0b1'
-	);
-	t.is(
-		Term.canCombine(new Term(0b1000), new Term(0b0)),
-		true,
-		'Can combine 0b1000 and 0b0'
-	);
-	t.is(
-		Term.canCombine(new Term(0b1111), new Term(0b11111)),
-		true,
-		'Can combine 0b1111 and 0b11111'
-	);
+	t.true(Term.canCombine(new Term(0b1), new Term(0b0)), 'Can combine 0b1 and 0b0');
+	t.true(Term.canCombine(new Term(0b11), new Term(0b1)), 'Can combine 0b11 and 0b1');
+	t.true(Term.canCombine(new Term(0b1000), new Term(0b0)), 'Can combine 0b1000 and 0b0');
+	t.true(Term.canCombine(new Term(0b1111), new Term(0b11111)), 'Can combine 0b1111 and 0b11111');
 });
 
 test((t) => {
-	t.is(
+	t.falsy(
 		Term.countDifferences(
 			Term.getCombinedTerm(new Term(0b0), new Term(0b0)),
 			new Term(0b0)
 		),
-		0,
 		'0b0 and 0b0 combine to 0b0'
 	);
-	t.is(
+	t.falsy(
 		Term.countDifferences(
 			Term.getCombinedTerm(new Term(0b1111), new Term(0b1111)),
 			new Term(0b1111)
 		),
-		0,
 		'0b1111 and 0b1111 combine to 0b1111'
 	);
-	t.is(
+	t.falsy(
 		Term.countDifferences(
 			Term.getCombinedTerm(new Term(0b10), new Term(0b01)),
 			new Term([null, null])
 		),
-		0,
 		'0b10 and 0b01 combine to `--`'
 	);
 });
