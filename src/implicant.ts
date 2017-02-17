@@ -1,74 +1,114 @@
-import Term from './term';
-import Digit from './digit';
+import Minterm from './minterm';
 
-/**
- * Represents one or more combined terms.
- *
- * @class Implicant
- * @extends {Term}
- */
-class Implicant extends Term {
-	protected minterms: Term[] = [];
+const log2 = (x: number): number => Math.log(x) / Math.log(2);
+
+export default class Implicant {
+	protected readonly minterms: Minterm[];
 
 	/**
-	 * Determine if two terms can be combined. Will return `true` if there is
-	 * only one digit difference between `left` and `right`.
+	 * Determine if two implicants can be combined. Will be `true` if there is
+	 * only one differing bit between them -- either a set bit or an uncommon
+	 * bit.
 	 *
 	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
+	 * @param {Implicant} left
+	 * @param {Implicant} right
 	 * @returns {boolean}
 	 *
 	 * @memberOf Implicant
 	 */
-	static canCombine (left: Term, right: Term): boolean {
-		return Implicant.countDifferences(left, right) === 1;
+	static canCombine (left: Implicant, right: Implicant): boolean {
+		return log2(
+			// Compare set bits
+			(left.getCommonBits() ^ right.getCommonBits()) |
+			(left.getUncommonBits() ^ right.getUncommonBits())
+		) % 1 === 0;
 	}
 
 	/**
-	 * Combine two terms, returning a new term whose digits are replaced with an
-	 * UNCOMMON Digit where the two input terms differ.
+	 * Returns a new implicant with all the minterms of each given implicant
+	 * combined.
 	 *
 	 * @static
-	 * @param {Term} left
-	 * @param {Term} right
-	 * @returns {Term}
+	 * @param {Implicant} left
+	 * @param {Implicant} right
+	 * @returns {Implicant}
 	 *
 	 * @memberOf Implicant
 	 */
-	static getCombinedTerm (left: Term, right: Term): Term {
-		const length = Math.max(left.length, right.length);
-		const digits = [];
-		for (let i = 0; i < length; i++) {
-			const leftDigit = left.getDigit(i);
-			const rightDigit = right.getDigit(i);
-			digits.unshift(
-				// Are the two digits the same?
-				leftDigit === rightDigit ?
-					// If so, just use one of them
-					leftDigit :
-					// Otherwise, they differ
-					Digit.UNCOMMON
-			);
-		}
-		return new Term(digits);
+	static getCombinedImplicant (left: Implicant, right: Implicant): Implicant {
+		return new Implicant(
+			...left.getMinterms(),
+			...right.getMinterms()
+		);
 	}
 
 	/**
-	 * Creates an instance of Implicant.
+	 * Creates an instance of Implicant. Must be given a set of minterms.
 	 *
-	 * @param {Term[]} minterms
+	 * @param {...Minterm[]} minterms
 	 *
 	 * @memberOf Implicant
 	 */
-	constructor (minterms: Term[]) {
-		super(
-			// Combine all the midterms and prime the state
-			minterms.reduce(Implicant.getCombinedTerm)
-		);
+	constructor (...minterms: Minterm[]) {
 		this.minterms = minterms;
 	}
 
-}
+	/**
+	 * Get the array of minterms that make up this implicant.
+	 *
+	 * @returns {Minterm[]}
+	 *
+	 * @memberOf Implicant
+	 */
+	public getMinterms (): Minterm[] {
+		return this.minterms;
+	}
 
-export default Implicant;
+	/**
+	 * Returns a number representing all the common set bits between all
+	 * minterms in this implicant.
+	 *
+	 * @example
+	 *
+	 *     new Implicant(
+	 *       0b1110,
+	 *       0b0111
+	 *     ).getCommonBits() === 0b0110
+	 *
+	 * @returns {number}
+	 *
+	 * @memberOf Implicant
+	 */
+	public getCommonBits (): number {
+		return this.minterms.reduce((result, minterm) => (
+			result & minterm
+		));
+	}
+
+	/**
+	 * Returns a number representing all the uncommon bits between all minterms
+	 * in this implicant.
+	 *
+	 * @example
+	 *
+	 *     new Implicant(
+	 *       0b1110,
+	 *       0b0111
+	 *     ).getUncommonBits() === 0b1001
+	 *
+	 * @returns {number}
+	 *
+	 * @memberOf Implicant
+	* */
+	public getUncommonBits (): number {
+		let result = 0;
+		for (let i = 0; i < this.minterms.length - 1; i++) {
+			const left = this.minterms[i];
+			const right = this.minterms[i + 1];
+			result |= (left ^ right);
+		}
+		return result;
+	}
+
+}
