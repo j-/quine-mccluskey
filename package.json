@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "docs": "typedoc --out docs/",
     "coverage": "nyc report --reporter=text-html",
     "test": "tsc && nyc ava"
   },
@@ -22,6 +23,7 @@
     "ava": "^0.18.1",
     "number-digits": "^0.1.0",
     "nyc": "^10.1.2",
+    "typedoc": "^0.5.7",
     "typescript": "^2.1.6"
   }
 }

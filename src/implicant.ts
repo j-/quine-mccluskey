@@ -1,5 +1,6 @@
 import Minterm from './minterm';
 
+/** @private */
 const log2 = (x: number): number => Math.log(x) / Math.log(2);
 
 export default class Implicant {
