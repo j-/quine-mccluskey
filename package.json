@@ -2,7 +2,7 @@
   "name": "quine-mccluskey",
   "version": "0.2.0",
   "description": "Minimize boolean functions",
-  "main": "dist/index.js",
+  "main": "dist",
   "scripts": {
     "build": "tsc",
     "docs": "typedoc --out docs/ --name Quine–McCluskey --gaID UA-19913873-7 && touch docs/.nojekyll",
@@ -28,6 +28,7 @@
     "typescript": "^2.1.6"
   },
   "files": [
+    "src/",
     "dist/"
   ]
 }
