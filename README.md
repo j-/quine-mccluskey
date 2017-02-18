@@ -11,6 +11,8 @@ The project is written in [TypeScript](https://github.com/Microsoft/TypeScript).
 $ npm run build
 ```
 
+Output goes into the `dist/` directory.
+
 ## Testing
 
 Tests are run with [AVA](https://github.com/avajs/ava). Code coverage is tested
@@ -27,6 +29,8 @@ Docs are generated with [TypeDoc](https://github.com/TypeStrong/typedoc).
 ```sh
 $ npm run docs
 ```
+
+Output goes into the `docs/` directory.
 
 ## See also
 
