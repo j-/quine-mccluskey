@@ -3,6 +3,9 @@ import Minterm from './minterm';
 /** @private */
 const log2 = (x: number): number => Math.log(x) / Math.log(2);
 
+/** @private */
+const numeric = (a: any, b: any) => a - b;
+
 export default class Implicant {
 	protected readonly minterms: Minterm[];
 
@@ -52,7 +55,7 @@ export default class Implicant {
 	 * @memberOf Implicant
 	 */
 	constructor (...minterms: Minterm[]) {
-		this.minterms = minterms;
+		this.minterms = [...minterms].sort(numeric);
 	}
 
 	/**
