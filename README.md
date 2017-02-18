@@ -5,6 +5,7 @@ Quine–McCluskey
 
 [![Build Status][travis-svg]][travis-link]
 [![Coverage Status][coveralls-svg]][coveralls-link]
+[![Latest Version][version-svg]][version-link]
 
 ## Building
 
@@ -48,3 +49,5 @@ MIT
 [travis-link]: https://travis-ci.org/j-/quine-mccluskey
 [coveralls-svg]: https://coveralls.io/repos/github/j-/quine-mccluskey/badge.svg?branch=master
 [coveralls-link]: https://coveralls.io/github/j-/quine-mccluskey?branch=master
+[version-svg]: https://badge.fury.io/js/quine-mccluskey.svg
+[version-link]: https://www.npmjs.com/package/quine-mccluskey
