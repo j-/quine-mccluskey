@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "docs": "typedoc --out docs/",
-    "coverage": "nyc report --reporter=html",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage-html": "nyc report --reporter=html",
     "test": "tsc && nyc ava"
   },
   "repository": {
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/j-/quine-mccluskey#readme",
   "devDependencies": {
     "ava": "^0.18.1",
+    "coveralls": "^2.11.16",
     "number-digits": "^0.1.0",
     "nyc": "^10.1.2",
     "typedoc": "^0.5.7",
