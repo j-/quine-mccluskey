@@ -43,7 +43,7 @@ Output goes into the `docs/` directory.
 
 ## License
 
-MIT
+[MIT](LICENSE)
 
 [travis-svg]: https://travis-ci.org/j-/quine-mccluskey.svg
 [travis-link]: https://travis-ci.org/j-/quine-mccluskey
