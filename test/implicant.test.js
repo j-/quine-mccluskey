@@ -1,6 +1,28 @@
 import test from 'ava';
 import Implicant from '../dist/implicant';
 
+test('Implicant must have minterms', (t) => {
+	t.throws(() => new Implicant(), 'Implicant must be initialized with minterms', 'Throws on construction');
+});
+
+test('Implicant must have power of 2 minterms', (t) => {
+	t.notThrows(() => new Implicant(1), 'OK when given 1 minterm');
+	t.notThrows(() => new Implicant(1, 2), 'OK when given 2 minterms');
+	t.throws(() => new Implicant(1, 2, 3), 'Number of minterms must be a power of 2, got 3', 'Throws when given 3 minterms');
+	t.notThrows(() => new Implicant(1, 2, 3, 4), 'OK when given 4 minterms');
+	t.throws(() => new Implicant(1, 2, 3, 4, 5), 'Number of minterms must be a power of 2, got 5', 'Throws when given 5 minterms');
+	t.throws(() => new Implicant(1, 2, 3, 4, 5, 6), 'Number of minterms must be a power of 2, got 6', 'Throws when given 6 minterms');
+	t.throws(() => new Implicant(1, 2, 3, 4, 5, 6, 7), 'Number of minterms must be a power of 2, got 7', 'Throws when given 7 minterms');
+	t.notThrows(() => new Implicant(1, 2, 3, 4, 5, 6, 7, 8), 'OK when given 8 minterms');
+});
+
+test('Implicant minterms must be unique', (t) => {
+	t.notThrows(() => new Implicant(1), 'OK when given 1 minterm');
+	t.throws(() => new Implicant(1, 1), 'Implicant must be initialized with unique set of minterms', 'Throws when given 1, 1');
+	t.throws(() => new Implicant(2, 2), 'Implicant must be initialized with unique set of minterms', 'Throws when given 2, 2');
+	t.throws(() => new Implicant(1, 2, 3, 1), 'Implicant must be initialized with unique set of minterms', 'Throws when given 1, 2, 3, 1');
+});
+
 test('Get common bits from size 1 implicant', (t) => {
 	t.is(new Implicant(0).getCommonBits(), 0);
 	t.is(new Implicant(1).getCommonBits(), 1);
@@ -9,12 +31,11 @@ test('Get common bits from size 1 implicant', (t) => {
 });
 
 test('Get common bits from size 2 implicant', (t) => {
-	t.is(new Implicant(0b00, 0b00).getCommonBits(), 0b00);
 	t.is(new Implicant(0b00, 0b01).getCommonBits(), 0b00);
-	t.is(new Implicant(0b10, 0b00).getCommonBits(), 0b00);
-	t.is(new Implicant(0b01, 0b01).getCommonBits(), 0b01);
-	t.is(new Implicant(0b10, 0b10).getCommonBits(), 0b10);
-	t.is(new Implicant(0b11, 0b11).getCommonBits(), 0b11);
+	t.is(new Implicant(0b00, 0b10).getCommonBits(), 0b00);
+	t.is(new Implicant(0b00, 0b11).getCommonBits(), 0b00);
+	t.is(new Implicant(0b01, 0b11).getCommonBits(), 0b01);
+	t.is(new Implicant(0b10, 0b11).getCommonBits(), 0b10);
 });
 
 test('Get uncommon bits from size 1 implicant', (t) => {
@@ -25,12 +46,11 @@ test('Get uncommon bits from size 1 implicant', (t) => {
 });
 
 test('Get uncommon bits from size 2 implicant', (t) => {
-	t.is(new Implicant(0b00, 0b00).getUncommonBits(), 0b00);
 	t.is(new Implicant(0b00, 0b01).getUncommonBits(), 0b01);
-	t.is(new Implicant(0b10, 0b00).getUncommonBits(), 0b10);
-	t.is(new Implicant(0b01, 0b01).getUncommonBits(), 0b00);
-	t.is(new Implicant(0b10, 0b10).getUncommonBits(), 0b00);
-	t.is(new Implicant(0b11, 0b11).getUncommonBits(), 0b00);
+	t.is(new Implicant(0b00, 0b10).getUncommonBits(), 0b10);
+	t.is(new Implicant(0b00, 0b11).getUncommonBits(), 0b11);
+	t.is(new Implicant(0b01, 0b11).getUncommonBits(), 0b10);
+	t.is(new Implicant(0b10, 0b11).getUncommonBits(), 0b01);
 });
 
 test('Can combine two size 1 implicants with 1 difference', (t) => {
