@@ -61,3 +61,28 @@ export const getPrimeImplicants = (minterms: Minterm[], dontcares: Minterm[]): I
 	}
 	return primeImplicants;
 };
+
+/**
+ * Determine which prime implicants have a minterm that no other prime implicant
+ * has and is thus essential.
+ *
+ * @param {Implicant[]} implicants
+ * @returns {Implicant[]}
+ */
+export const getEssentialPrimeImplicants = (implicants: Implicant[], dontcares: Minterm[] = []): Implicant[] => (
+	implicants.filter((candidate) => (
+		// Only one of the minterms needs to be unique
+		// for this implicant to be considered essential
+		candidate.getMinterms().some((minterm) => (
+			// We care about this minterm, and
+			dontcares.indexOf(minterm) === -1 &&
+			// it is unique to this candidate
+			implicants.every((other) => (
+				// This implicant is the candidate, or
+				candidate === other ||
+				// it does not contain the given minterm
+				!other.hasMinterm(minterm)
+			))
+		))
+	))
+);
