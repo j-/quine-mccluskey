@@ -67,6 +67,7 @@ export const getPrimeImplicants = (minterms: Minterm[], dontcares: Minterm[]): I
  * has and is thus essential.
  *
  * @param {Implicant[]} implicants
+ * @param {Implicant[]} dontcares
  * @returns {Implicant[]}
  */
 export const getEssentialPrimeImplicants = (implicants: Implicant[], dontcares: Minterm[] = []): Implicant[] => (
