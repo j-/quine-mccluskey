@@ -23,7 +23,6 @@
   "devDependencies": {
     "ava": "^0.18.1",
     "coveralls": "^2.11.16",
-    "number-digits": "^0.1.0",
     "nyc": "^10.1.2",
     "typedoc": "^0.5.7",
     "typescript": "^2.1.6"
