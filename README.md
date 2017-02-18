@@ -4,6 +4,7 @@ Quine–McCluskey
 > Minimize boolean functions
 
 [![Build Status][travis-svg]][travis-link]
+[![Coverage Status][coveralls-svg]][coveralls-link]
 
 ## Building
 
@@ -45,3 +46,5 @@ MIT
 
 [travis-svg]: https://travis-ci.org/j-/quine-mccluskey.svg
 [travis-link]: https://travis-ci.org/j-/quine-mccluskey
+[coveralls-svg]: https://coveralls.io/repos/github/j-/quine-mccluskey/badge.svg?branch=master
+[coveralls-link]: https://coveralls.io/github/j-/quine-mccluskey?branch=master
