@@ -1,10 +1,7 @@
 import Minterm from './minterm';
 
-/** @private */
-const log2 = (x: number): number => Math.log(x) / Math.log(2);
-
-/** @private */
-const isPowerOf2 = (x: number): boolean => log2(x) % 1 === 0;
+/** @private @see http://stackoverflow.com/a/600306 */
+const isPowerOf2 = (x: number): boolean => x !== 0 && ((x & (x - 1)) === 0);
 
 /** @private */
 const numeric = (a: any, b: any) => a - b;
