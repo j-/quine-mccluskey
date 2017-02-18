@@ -1,6 +1,6 @@
 {
   "name": "quine-mccluskey",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Minimize boolean functions",
   "main": "dist/index.js",
   "scripts": {
