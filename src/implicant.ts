@@ -155,12 +155,33 @@ export default class Implicant {
 	* */
 	public getUncommonBits (): number {
 		let result = 0;
-		for (let i = 0; i < this.minterms.length - 1; i++) {
-			const left = this.minterms[i];
-			const right = this.minterms[i + 1];
+		const { minterms } = this;
+		const { length } = minterms;
+		for (let i = 0; i < length - 1; i++) {
+			const left = minterms[i];
+			const right = minterms[i + 1];
 			result |= (left ^ right);
 		}
 		return result;
+	}
+
+	/**
+	 * Check if the given minterm is one of the minterms in this implicant.
+	 *
+	 * @param {Minterm} minterm
+	 * @returns {boolean}
+	 *
+	 * @memberOf Implicant
+	 */
+	public hasMinterm (minterm: Minterm): boolean {
+		const { minterms } = this;
+		const { length } = minterms;
+		for (let i = 0; i < length; i++) {
+			if (minterms[i] === minterm) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -122,3 +122,15 @@ test('Can combine to produce size 4 implicant', (t) => {
 	t.is(combined.getMinterms().length, 4, 'Correct number of minterms');
 	t.deepEqual(combined.getMinterms(), [8, 9, 10, 11], 'Correct minterms');
 });
+
+test('Can check if implicant has minterm', (t) => {
+	const implicant = new Implicant(1, 3, 5, 6);
+	t.true(implicant.hasMinterm(1));
+	t.false(implicant.hasMinterm(2));
+	t.true(implicant.hasMinterm(3));
+	t.false(implicant.hasMinterm(4));
+	t.true(implicant.hasMinterm(5));
+	t.true(implicant.hasMinterm(6));
+	t.false(implicant.hasMinterm(7));
+	t.false(implicant.hasMinterm(8));
+});
