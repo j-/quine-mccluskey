@@ -53,6 +53,15 @@ test('Get uncommon bits from size 2 implicant', (t) => {
 	t.is(new Implicant(0b10, 0b11).getUncommonBits(), 0b01);
 });
 
+test('Can determine if two implicants are equal', (t) => {
+	t.true(Implicant.isEqual(new Implicant(1), new Implicant(1)), 'Size 1 implicants are equal');
+	t.true(Implicant.isEqual(new Implicant(2), new Implicant(2)), 'Size 1 implicants are equal');
+	t.true(Implicant.isEqual(new Implicant(1, 2), new Implicant(1, 2)), 'Size 2 implicants are equal');
+	t.true(Implicant.isEqual(new Implicant(1, 2), new Implicant(2, 1)), 'Order does not matter');
+	t.false(Implicant.isEqual(new Implicant(1), new Implicant(1, 2)), 'False if different number of minterms');
+	t.false(Implicant.isEqual(new Implicant(1, 2, 3, 4), new Implicant(1, 2, 4, 5)), 'False if different minterms');
+});
+
 test('Can combine two size 1 implicants with 1 difference', (t) => {
 	t.true(Implicant.canCombine(new Implicant(4), new Implicant(12)));
 	t.true(Implicant.canCombine(new Implicant(8), new Implicant(9)));

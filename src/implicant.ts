@@ -61,6 +61,32 @@ export default class Implicant {
 	}
 
 	/**
+	 * Check if two implicants have the same set of minterms.
+	 *
+	 * @static
+	 * @param {Implicant} left
+	 * @param {Implicant} right
+	 * @returns {boolean}
+	 *
+	 * @memberOf Implicant
+	 */
+	static isEqual (left: Implicant, right: Implicant): boolean {
+		const leftMinterms = left.getMinterms();
+		const rightMinterms = right.getMinterms();
+		if (leftMinterms.length !== rightMinterms.length) {
+			// Implicants should have the same number of minterms
+			return false;
+		}
+		for (let i = 0; i < leftMinterms.length; i++) {
+			if (leftMinterms[i] !== rightMinterms[i]) {
+				// Each minterm must be identical
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Creates an instance of Implicant. Must be given a set of minterms.
 	 *
 	 * @param {...Minterm[]} minterms
