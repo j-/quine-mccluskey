@@ -3,6 +3,8 @@ Quine–McCluskey
 
 > Minimize boolean functions
 
+[![Build Status][travis-svg]][travis-link]
+
 ## Building
 
 The project is written in [TypeScript](https://github.com/Microsoft/TypeScript).
@@ -40,3 +42,6 @@ Output goes into the `docs/` directory.
 ## License
 
 MIT
+
+[travis-svg]: https://travis-ci.org/j-/quine-mccluskey.svg
+[travis-link]: https://travis-ci.org/j-/quine-mccluskey
