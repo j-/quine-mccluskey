@@ -7,6 +7,13 @@ Quine–McCluskey
 [![Coverage Status][coveralls-svg]][coveralls-link]
 [![Latest Version][version-svg]][version-link]
 
+## See also
+
+* [Documentation for this project](https://skeoh.com/quine-mccluskey)
+* [Source code for this project on GitHub](https://github.com/j-/quine-mccluskey)
+* ["Quine–McCluskey algorithm" on Wikipedia](https://en.wikipedia.org/wiki/Quine–McCluskey_algorithm)
+* ["Petrick's method" on Wikipedia](https://en.wikipedia.org/wiki/Petrick's_method)
+
 ## Building
 
 The project is written in [TypeScript](https://github.com/Microsoft/TypeScript).
@@ -35,11 +42,6 @@ $ npm run docs
 ```
 
 Output goes into the `docs/` directory.
-
-## See also
-
-* ["Quine–McCluskey algorithm" on Wikipedia](https://en.wikipedia.org/wiki/Quine–McCluskey_algorithm)
-* ["Petrick's method" on Wikipedia](https://en.wikipedia.org/wiki/Petrick's_method)
 
 ## License
 
