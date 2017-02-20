@@ -41,7 +41,7 @@ export const getPrimeImplicants = (minterms: Minterm[], dontcares: Minterm[]): I
 		// For all implicants in this list
 		for (let i = 0; i < implicants.length; i++) {
 			// For all implicants below this one
-			for (let j = i; j < implicants.length; j++) {
+			for (let j = i + 1; j < implicants.length; j++) {
 				const left = implicants[i];
 				const right = implicants[j];
 				if (!Implicant.canCombine(left, right)) {
